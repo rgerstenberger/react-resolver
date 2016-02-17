@@ -39,7 +39,7 @@ export default express()
                 <div id="app">${renderToString(<Resolved />)}</div>
 
                 <script>window.__REACT_RESOLVER_PAYLOAD__ = ${JSON.stringify(data)}</script>
-                <script src="/client.min.js"></script>
+                <script src="http://localhost:8080/client.min.js"></script>
               </body>
               </html>
             `)

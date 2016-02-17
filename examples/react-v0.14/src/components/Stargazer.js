@@ -8,10 +8,16 @@ import { resolve } from "react-resolver";
   const { user } = params;
   const url = `https://api.github.com/users/${user}`;
 
+  console.log("FETCHING DATA");
+
   return axios.get(url).then(({ data }) => data);
 })
-export default class Stargazer extends React.Component {
+class Stargazer extends React.Component {
   static displayName = "Stargazer"
+
+  componentDidMount() {
+    console.log("MOUNTING STARGAZER");
+  }
 
   render() {
     const { stargazer } = this.props;
@@ -50,6 +56,31 @@ export default class Stargazer extends React.Component {
             </a>
           </div>
         </div>
+      </div>
+    );
+  }
+}
+
+export default class StargazerWrapper extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      backgroundColor: "#fff"
+    };
+  }
+
+  onClick() {
+    this.setState({
+      backgroundColor: `#ff${Math.floor(Math.random() * 9)}`
+    });
+  }
+
+  render() {
+    return (
+      <div style={this.state}>
+        <button onClick={this.onClick.bind(this)}>Click me for API call</button>
+        <Stargazer {...this.props} />
       </div>
     );
   }
